@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using DemoLibrary;
 
 namespace WPFApp
 {
@@ -11,6 +12,13 @@ namespace WPFApp
         public SunInfo()
         {
             InitializeComponent();
+        }
+
+        private async void loadSunInfo_Click(object sender, RoutedEventArgs e)
+        {
+            var sunData = await SunProcessor.LoadSunInformation();
+            sunriseText.Text = $"Today's sunrise time in Strasbourg is: {sunData.Sunrise.ToLocalTime().ToShortTimeString()}";
+            sunsetText.Text = $"Today's sunset time in Strasbourg is: {sunData.Sunset.ToLocalTime().ToShortTimeString()}";
         }
     }
 }
